@@ -8,8 +8,10 @@ A Lean Data Exchange Format for the Web
 ##### Preamble
 The preamble is used to determine if data is little endian.
 
+```
 - version - 1 byte - `1`
 - tag     - 1 byte - `s` (ASCII)
+```
 
 ##### Body
 
