@@ -32,7 +32,7 @@ Strings are null delimited.
 - float32 - 4 bits - `3`  - `0x4`
 - float64 - 4 bits - `4`  - `0x5`
 - ascii   - 4 bits - `5`  - `0x6`
-- utf-8*  - 4 bits - `6`  - `0x7`
+- utf-8   - 4 bits - `6`  - `0x7`
 ```
 
 **DELIMITERS**
@@ -46,7 +46,18 @@ Strings are null delimited.
 ```
 - integers          - variable - LEB128 encoding
 - floats            - fixed    - IEEE 754 encoding
-- string            - variable - UTF-8 encoding
+- string            - variable - Custom prefixVarint encoding
+```
+
+```
+ASCII
+0xxxxxxx 0xxxxxxx 0xxxxxxx 0xxxxxxx -> 0110 xxxxxxxx xxxxxxxx xxxxxxxx xxxx
+
+UTF-8
+0xxxxxxx                            -> 0111 00xxxxxx x.......
+110xxxxx 10xxxxxx                   -> 0111 01xxxxxx xxxxx...
+1110xxxx 10xxxxxx 10xxxxxx          -> 0111 10xxxxxx xxxxxxxx xx......
+11110xxx 10xxxxxx 10xxxxxx 10xxxxxx -> 0111 11xxxxxx xxxxxxxx xxxxxxx.
 ```
 
 ### OPTIMIZATIONS
