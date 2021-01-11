@@ -1,3 +1,7 @@
+mod shrink;
+
+use shrink::Shrink;
+
 fn main() {
-    println!("Hello, world!");
+    let _shr = Shrink::new(&[]);
 }

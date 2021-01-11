@@ -1,4 +1,6 @@
-pub type LEBResult<T> = Result<T, ParserError>;
+use crate::shrink::ErrorKind;
+
+pub type LEBResult<T> = Result<T, ErrorKind>;
 
 #[derive(Debug, Clone)]
 pub struct LEB<'a> {
@@ -15,11 +17,6 @@ impl<'a> LEB<'a> {
         }
     }
 
-    /// Pushes an id into the parser's sections_consumed.
-    pub(super) fn push_section_id(&mut self, section_id: &u8) {
-        self.sections_consumed.push(*section_id);
-    }
-
     pub fn data(&mut self) -> LEBResult<()> {
         // Consume preamble.
         self.data_preamble();
@@ -31,32 +28,14 @@ impl<'a> LEB<'a> {
         Ok(())
     }
 
-
     ///
-    pub fn skip_to_section(&mut self, section_id: u8) -> LEBResult<()> {
-        loop {
-            if section_id == self.section_id()? {
-                break;
-            }
-            let payload_len = self.peek_varuint32()?;
-            if !self.skip(payload_len as _) {
-                return Err(ParserError {
-                    kind: ErrorKind::BufferEndReached,
-                    cursor: self.cursor,
-                });
-            };
-        }
-        Ok(())
-    }
-
-    ///
-    pub fn peek_varuint32(&mut self) -> LEBResult<u32> {
+    pub fn peek_varuint32(&mut self) -> LEBResult<()> {
         let cursor = self.cursor;
         let value = self.varuint32();
         self.cursor = cursor;
         match value {
-            Ok(value) => Ok(value),
-            Err(kind) => Err(ParserError { kind, cursor }),
+            Ok(value) => Ok(()),
+            Err(kind) => Err(kind),
         }
     }
 
