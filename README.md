@@ -28,7 +28,7 @@ Strings are null delimited.
 **TYPES**
 ```
 - int     - 4 bits - `1`  - `0x1`
-- uint    - 4 bits - `2`  - `0x3`
+- sint    - 4 bits - `2`  - `0x3`
 - float32 - 4 bits - `3`  - `0x4`
 - float64 - 4 bits - `4`  - `0x5`
 - ascii   - 4 bits - `5`  - `0x6`
@@ -44,7 +44,8 @@ Strings are null delimited.
 
 **VALUES**
 ```
-- integers          - variable - LEB128 encoding
+- unsigned integers - variable - LEB128 encoding
+- signed integers   - variable - Custom LEB128 encoding
 - floats            - fixed    - IEEE 754 encoding
 - string            - variable - Custom prefixVarint encoding
 ```
@@ -64,6 +65,8 @@ UTF-8
 - 64-bit integers have an implicit stop because Shrink doesn't expect integers larger than 64-bit. And this allows shrink to use 9 bytes for full 64-bit integers instead of 10.
 
 - [Removing octet redundancy like in VLQ encoding](https://en.wikipedia.org/wiki/Variable-length_quantity#Removing_redundancy)
+
+- Signed integers use the same LEB128 conversion as the unsigned integers so there is no need for two's complement operations. The only consideration is sign extending the compressed value.
 
 
 ### SIMPLE EXAMPLE
