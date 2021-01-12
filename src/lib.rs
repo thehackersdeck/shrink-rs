@@ -1,3 +1,3 @@
 mod shrink;
 
-pub use shrink::{Shrink, LEB};
+pub use shrink::Shrink;

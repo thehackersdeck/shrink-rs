@@ -1,7 +1,7 @@
 mod errors;
-mod leb;
 mod shrink;
+mod json;
 
-pub(crate) use errors::ErrorKind;
-pub use leb::LEB;
-pub use shrink::Shrink;
+pub use errors::ErrorKind;
+pub use self::shrink::Shrink;
+

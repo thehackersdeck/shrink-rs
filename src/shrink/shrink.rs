@@ -1,21 +1,19 @@
+use super::json;
+
 #[derive(Debug)]
-pub struct Shrink<'a> {
-    data: &'a[u8],
+pub struct Shrink {
+    pub(crate) data: Vec<u8>,
 }
 
-impl <'a> Shrink <'a> {
-    pub fn new(data: &'a[u8]) -> Self {
-        Self {
-            data
-        }
+impl Shrink {
+    pub fn len(&self) -> usize {
+        self.data.len()
     }
-}
 
-impl <'a> From<String> for Shrink <'a> {
-    fn from(_json: String) -> Self {
-       // Convert json string to Shrink.
-       Self {
-           data: &[]
-       }
+    pub fn from_json(json: String) -> Self {
+        let json_bytes = json.into_bytes();
+        Self {
+            data: json::Writer::from_json(&json_bytes),
+        }
     }
 }

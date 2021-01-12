@@ -3,27 +3,16 @@ A Lean Data Exchange Format for the Web
 
 
 ### FORMAT
-- Stack based
 
-##### Preamble
-The preamble is used to determine if data is little endian.
+Shrink data is encoded in little endian because most modern architectures support it.
 
-```
-- version - 1 byte - `1`
-- tag     - 1 byte - `s` (ASCII)
-```
-
-##### Body
+The content can be made up of any number of values, key-value pairs and nested structures.
 
 Each value is preceded by a type.
 
-Nested structures are enclosed in delimiters.
+Nested structures are enclosed in delimiters. Array structurs contain a sequence of values, while map structures contain key-value pairs separated key_value delimiters.
 
-An array structure contains a sequence of values.
-
-A map structure contains key-value pairs seperated key_value delimiter.
-
-Strings are null delimited.
+Strings are null terminated like C strings. (Probably a bad idea)
 
 **TYPES**
 ```
@@ -87,6 +76,7 @@ UTF-8
 }
 ```
 
+_STALE (Some improvements have been made)_
 ```py
 0x01 0x73 # 1 s (Preamble)
 0x_F 0x_A 0x6E 0x61 0x6D 0x65 0x00 # name:
