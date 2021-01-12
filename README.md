@@ -99,7 +99,7 @@ _STALE (Some improvements have been made)_
 0x_D # ]
 ```
 
-For this contrived example, the JSON version takes 325 bytes while Shrink takes 227 saving 98 bytes.
+For this contrived example, the JSON version (without spaces) takes 246 bytes while Shrink takes 227 saving only 19 bytes.
 
 ### TODOs
 - [ ] Conversion from shrink to JSON

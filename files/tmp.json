@@ -1,13 +1,1 @@
-{
-    "name": "James Bourdelon",
-    "age": 42,
-    "height": 170.688,
-    "favorite_quotes": {
-        "Walt Disney": "The way to get started is to quit talking and begin doing",
-        "Anne Frank": "Whoever is happy will make others happy too"
-    },
-    "spoken_languages": [
-        "English",
-        "German"
-    ]
-}
+{"name":"James Bourdelon","age":42,"height":170.688,"favorite_quotes":{"Walt Disney":"The way to get started is to quit talking and begin doing","Anne Frank":"Whoever is happy will make others happy too"},"spoken_languages":["English","German"]}
